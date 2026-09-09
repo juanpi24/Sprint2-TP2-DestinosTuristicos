@@ -31,6 +31,7 @@ Proyecto desarrollado para el **Trabajo Práctico del Sprint 2**.
 
 ## 📂 Estructura del Proyecto
 
+```text
 src/
 ├── components/
 │   ├── Footer.jsx         # Pie de página con créditos
@@ -66,9 +67,9 @@ src/
     ```bash
     npm run dev
 
+
 ---    
 
 ## 🚀 Deploy online (Netlify)
 * [Mis Destinos ](https://destinosturisticoslist.netlify.app/) 
-
 
