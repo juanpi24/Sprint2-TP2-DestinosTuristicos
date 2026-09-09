@@ -6,12 +6,6 @@ Proyecto desarrollado para el **Trabajo Práctico del Sprint 2**.
 
 ---
 
-## 🚀 Enlace al Deploy
-
-- **Demo en vivo:** [https://destinosturisticoslist.netlify.app/](https://destinosturisticoslist.netlify.app/) 
-
----
-
 ## 🛠️ Tecnologías Utilizadas
 
 - **React 18 / 19** (Vite)
@@ -37,10 +31,9 @@ Proyecto desarrollado para el **Trabajo Práctico del Sprint 2**.
 
 ## 📂 Estructura del Proyecto
 
-```text
 src/
 ├── components/
-│   ├── Footer.jsx         # Pie de página
+│   ├── Footer.jsx         # Pie de página con créditos
 │   ├── ItemCard.jsx       # Tarjeta individual con renderizado de badge y botón toggle
 │   ├── ItemList.jsx       # Grilla de destinos y mensaje de "Sin resultados"
 │   ├── ListPanel.jsx      # Panel/Modal lateral con la lista guardada y botón vaciar
@@ -55,4 +48,27 @@ src/
 ├── App.jsx                # Componente principal / Orquestador
 ├── index.css              # Configuración de Tailwind v4 y variables
 └── main.jsx               # Punto de entrada de la aplicación
+
+---
+
+## Cómo correrlo
+
+1. Clonar el repositorio e ingresar a la carpeta del proyecto:
+   ```bash
+   git clone https://github.com/juanpi24/Sprint2-TP2-DestinosTuristicos 
+   cd Sprint2-TP2-DestinosTuristicos
+
+2. Instalar las dependencias:
+    ```bash
+    npm install
+
+3. Iniciar el servidor de desarrollo local:
+    ```bash
+    npm run dev
+
+---    
+
+## 🚀 Deploy online (Netlify)
+* [Mis Destinos ](https://destinosturisticoslist.netlify.app/) 
+
 
