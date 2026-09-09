@@ -52,6 +52,7 @@ export function ListPanel({
   const handleClearList = () => {
     onClearList();  // Borra los datos (y limpia el localStorage a través del hook)
     closeConfirm(); // Cierra el modal de confirmación
+    onClose();      // Cierra el panel lateral
   };
 
   /* Si el panel no está abierto, no se renderiza nada. */
