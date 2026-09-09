@@ -92,6 +92,8 @@ export function ListPanel({
             <span className="text-xs text-on-surface-variant">
               Destinos seleccionados
             </span>
+
+           { /* Contador de destinos seleccionados */}
             <span className="text-xs font-bold text-primary px-2.5 py-0.5 rounded-full bg-primary-container/20 border border-primary/40">
               {selectedDestinations.length}{' '}
               {selectedDestinations.length === 1 ? 'destino' : 'destinos'}
