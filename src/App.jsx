@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { DESTINATIONS } from './data/destinations';
 import { useWatchlist } from './hooks/useWatchlist';
 import { useToggle } from './hooks/useToggle';
+import { useDarkMode } from './hooks/useDarkMode';
 import { Navbar } from './components/Navbar';
 import { SearchBar } from './components/SearchBar';
 import { ItemList } from './components/ItemList';
@@ -15,7 +16,10 @@ export default function App() {
 // Desestructuración del hook useToggle para manejar el estado del panel lateral (drawer) de la lista de seguimiento.
   const [isDrawerOpen, , openDrawer, closeDrawer] = useToggle(false);
 
-  // Estados locales para la búsqueda y el filtro de categoría
+// 🌙 Reutilización de useLocalStorage a través de useDarkMode
+  const { isDark, toggleDarkMode } = useDarkMode();  
+
+// Estados locales para la búsqueda y el filtro de categoría
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Todos');
 
@@ -35,7 +39,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-surface text-on-surface flex flex-col">
-      <Navbar count={count} onOpenDrawer={openDrawer} />
+      <Navbar 
+      count={count} 
+      onOpenDrawer={openDrawer}
+      isDark={isDark}
+      onToggleDarkMode={toggleDarkMode} />
 
       <main className="flex-1 w-full max-w-lg mx-auto pt-20 pb-24 px-4 flex flex-col gap-6">
         <SearchBar

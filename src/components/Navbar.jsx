@@ -1,4 +1,4 @@
-export function Navbar({ count, onOpenDrawer }) {
+export function Navbar({ count, onOpenDrawer,isDark, onToggleDarkMode }) {
   return (
     <>
       {/* TopAppBar Fixed Header */
@@ -26,6 +26,19 @@ export function Navbar({ count, onOpenDrawer }) {
           Se muestra un badge con la cantidad de ítems en la lista solo si count es mayor a 0.
           Se aplican clases de Tailwind CSS para estilos, efectos visuales y responsividad. */  
        }  
+
+       {/* Botón de Modo Oscuro / Claro */}
+          <button
+            type="button"
+            onClick={onToggleDarkMode}
+            aria-label="Cambiar tema"
+            className="p-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer"
+          >
+            <span className="material-symbols-outlined text-[20px]">
+              {isDark ? 'light_mode' : 'dark_mode'}
+            </span>
+          </button>
+
         <button
           type="button"
           onClick={onOpenDrawer}
