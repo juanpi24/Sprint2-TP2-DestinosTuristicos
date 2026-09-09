@@ -43,6 +43,7 @@ export default function App() {
           onSearchChange={setSearchQuery}
           category={selectedCategory}
           onCategoryChange={setSelectedCategory}
+          items={DESTINATIONS} // 👈 Pasamos los datos completos para derivar categorías
         />
 
         <ItemList

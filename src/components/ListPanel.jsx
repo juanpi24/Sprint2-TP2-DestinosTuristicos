@@ -18,6 +18,11 @@ export function ListPanel({
   onToggle,
   onClearList,
 }) {
+
+  
+  /* Usamos useToggle local para controlar el modal de confirmación*/
+  const [isConfirmOpen, , openConfirm, closeConfirm] = useToggle(false);
+  
   // Bonus: Cierre del modal presionando la tecla Escape
   /* Se utiliza useEffect para agregar un event listener al objeto window que escucha el evento 'keydown'.
      Si la tecla presionada es 'Escape', se llama a la función onClose para cerrar el panel.
@@ -37,12 +42,11 @@ export function ListPanel({
     /* Se agrega el event listener al objeto window para escuchar el evento 'keydown'.
        Se llama a la función handleKeyDown cuando se presiona una tecla. */
     window.addEventListener('keydown', handleKeyDown);
+
+    /* Se devuelve una función de limpieza que elimina el event listener cuando el componente se desmonta o cuando isOpen cambia. */
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose]);  // Se ejecuta solo cuando el panel se abre/cierra o cambia la función de cierre
 
-
-  /* 2. Usamos useToggle local para controlar el modal de confirmación*/
-  const [isConfirmOpen, , openConfirm, closeConfirm] = useToggle(false);
 
   /* Esta función se ejecuta al presionar "Confirmar" en el modal */
   const handleClearList = () => {

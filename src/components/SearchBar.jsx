@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 /**
  * Este componente representa una barra de búsqueda que permite a los usuarios buscar lugares y filtrar por categorías.
  * 
@@ -7,9 +9,22 @@
  *   - category: Categoría seleccionada.
  *   - onCategoryChange: Función para manejar el cambio en la categoría.
  */
-const CATEGORIES = ['Todos', 'Naturaleza', 'Aventura', 'Montaña', 'Lagos y Glaciares'];
+/*const CATEGORIES = ['Todos', 'Naturaleza', 'Aventura', 'Montaña', 'Lagos y Glaciares'];*/
 
-export function SearchBar({ search, onSearchChange, category, onCategoryChange }) {
+export function SearchBar({ 
+  search, 
+  onSearchChange, 
+  category, 
+  onCategoryChange,
+  items = [] // Se recibe la lista de destinos completa 
+}) {
+
+  // Derivamos las categorías de los datos en tiempo de ejecución (sin duplicados)
+  const categories = useMemo(() => {
+    const uniqueCategories = [...new Set(items.map((item) => item.category))];
+    return ['Todos', ...uniqueCategories];
+  }, [items]);
+
   return (
     <section className="flex flex-col gap-3 pt-2">
       <div>
@@ -22,10 +37,9 @@ export function SearchBar({ search, onSearchChange, category, onCategoryChange }
       </div>
 
       {/* Input Controlado */
-      /* Se utiliza un input controlado para manejar el valor de búsqueda.
-         Se aplican clases de Tailwind CSS para estilos, efectos visuales y responsividad.
-         El icono de búsqueda se posiciona absolutamente dentro del contenedor del input. */
+      /* Se utiliza un input controlado para manejar el valor de búsqueda.*/
       }
+      {/* Campo de Búsqueda por texto */}
       <div className="relative flex items-center w-full">
         <span className="material-symbols-outlined absolute left-4 text-outline pointer-events-none">
           search
@@ -40,17 +54,13 @@ export function SearchBar({ search, onSearchChange, category, onCategoryChange }
         />
       </div>
 
-      {/* Chips de Categorías */
-
-      /* Se utiliza un contenedor horizontal con overflow-x-auto para mostrar las categorías como chips.
-         Se aplican clases de Tailwind CSS para estilos, efectos visuales y responsividad.
-         Cada chip es un botón que cambia de estilo según si está activo o no. */
-      }
+      {/* Chips de Categorías */}
+      {/* 🔀 Botones de Filtro por Categoría (Derivadas dinámicamente) */}
       <div className="w-full flex gap-2 overflow-x-auto py-1 no-scrollbar">
 
         {/* Mapeo de categorías para renderizar chips de selección */}
 
-        {CATEGORIES.map((cat) => {
+        {categories.map((cat) => {
           const isActive = category === cat;
           return (
             <button
