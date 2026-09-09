@@ -9,7 +9,10 @@ import { ListPanel } from './components/ListPanel';
 import { Footer } from './components/Footer';
 
 export default function App() {
+// Desestructuración del hook useWatchlist para obtener la lista de seguimiento, el conteo de ítems, la función para alternar ítems y la función para vaciar la lista.
   const { list: watchlist, count, toggleItem, clearList } = useWatchlist();
+
+// Desestructuración del hook useToggle para manejar el estado del panel lateral (drawer) de la lista de seguimiento.
   const [isDrawerOpen, , openDrawer, closeDrawer] = useToggle(false);
 
   // Estados locales para la búsqueda y el filtro de categoría

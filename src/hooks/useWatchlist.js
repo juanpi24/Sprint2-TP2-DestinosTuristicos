@@ -39,13 +39,13 @@ export function useWatchlist(storageKey = 'mis-destinos-favs', initialItems = []
 
 // Limpieza de estado y localStorage con confirmación nativa
 const clearList = () => {
-  if (window.confirm("¿Estás seguro de que deseas vaciar la lista?")) {
+  //if (window.confirm("¿Estás seguro de que deseas vaciar la lista?")) {
     // 1. Limpia el estado de la lista
     setList([]);
     
     // 2. Elimina el elemento del almacenamiento usando su clave
     localStorage.removeItem('mis-destinos-favs');
-  }
+  //}
 };
 
   return {

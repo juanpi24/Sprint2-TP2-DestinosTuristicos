@@ -17,8 +17,13 @@ export function useToggle(initialState = false) {
    * Funciones para alternar, abrir y cerrar el toggle.
    * Se usan useCallback para memorizar las funciones y evitar re-renderizados innecesarios.
    */
+  // Invierte el valor actual del estado (si está en true lo pasa a false, y viceversa)
   const toggle = useCallback(() => setState((prev) => !prev), []);
+
+  // Fuerza el estado directamente a true - Abre un menú, mostrar un panel lateral (drawer)
   const setOpen = useCallback(() => setState(true), []);
+
+  // Fuerza el estado directamente a false - Cerrar el panel, ocultar un menú al hacer clic afuera o cerrar un modal al presionar una "X"
   const setClose = useCallback(() => setState(false), []);
 
 
