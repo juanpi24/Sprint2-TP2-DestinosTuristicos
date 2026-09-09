@@ -41,6 +41,9 @@ export function SearchBar({
       }
       {/* Campo de Búsqueda por texto */}
       <div className="relative flex items-center w-full">
+        <label htmlFor="search" className="sr-only">
+          Buscar por nombre de lugar o provincia
+        </label>
         <span className="material-symbols-outlined absolute left-4 text-outline pointer-events-none">
           search
         </span>
