@@ -75,8 +75,9 @@ npm install
 npm run dev
 ```
 
----
+---    
 
 ## 🚀 Deploy online (Netlify)
+* [Mis Destinos ](https://destinosturisticoslist.netlify.app/) 
 
-- [Mis Destinos](https://destinosturisticoslist.netlify.app/)
+
