@@ -44,7 +44,7 @@ const clearList = () => {
     setList([]);
     
     // 2. Elimina el elemento del almacenamiento usando su clave
-    localStorage.removeItem('mis-destinos-favs');
+    localStorage.removeItem(storageKey);
   //}
 };
 
