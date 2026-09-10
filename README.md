@@ -29,7 +29,23 @@ Proyecto desarrollado para el **Trabajo Práctico del Sprint 2**.
 
 ---
 
-## 📂 Estructura del Proyecto
+## 🧠 Decisiones de estado
+
+- **`watchlist` vive en `App.jsx`**, a través del hook `useWatchlist()`, porque es el ancestro común de todos los componentes que la necesitan: `Navbar` (contador), `ItemList`/`ItemCard` (saber si un destino ya está agregado) y `ListPanel` (mostrar la lista completa). Se modifica con **una sola función `toggleItem`**, sin mutar el array (`spread` + `filter`).
+- **La watchlist guarda solo los `id` de los destinos** (`['talampaya', 'iguazu']`), no los objetos completos. Los componentes que necesitan el destino entero (`ListPanel`) lo reconstruyen filtrando `DESTINATIONS` por esos ids. Menos redundancia en `localStorage` y una sola fuente de verdad para los datos del destino (`data/destinations.js`).
+- **`count` e `isInList` son estado derivado, no estado propio.** `count` es `list.length` y `isInList` es `watchlist.includes(item.id)`, calculados en cada render. Guardarlos en un `useState` aparte los desincronizaría de la lista real tarde o temprano.
+- **`searchQuery` y `selectedCategory` viven en `App.jsx`** como estados independientes, y `filteredDestinations` se deriva de ambos con `useMemo` (se recalcula solo cuando cambia alguno de los dos, no en cada render).
+- **`isConfirmOpen` vive local en `ListPanel.jsx`** (con su propio `useToggle`), no en `App`, porque solo ese panel necesita saber si el modal de confirmación está abierto. Cada instancia de `useToggle` es independiente entre sí.
+
+## 🔁 Qué se simplificó con el refactor del Bloque D
+
+Antes de extraer los hooks, `App.jsx` tenía el `useState` de la lista, el `useEffect` de lectura/escritura en `localStorage` con sus `try/catch`, el `useEffect` del título de la pestaña y la función `toggleItem`, todo mezclado en un solo componente. Después del refactor:
+
+- `localStorage`, `JSON.parse` y `JSON.stringify` quedaron encapsulados **únicamente** en `useLocalStorage.js`.
+- `App.jsx` pasó a consumir una sola línea (`const { list, count, toggleItem, clearList } = useWatchlist()`) sin saber ni le importa cómo se persiste la lista.
+- La lógica de abrir/cerrar (drawer y modal de confirmación) se repetía como `useState` + funciones sueltas en varios lugares; con `useToggle` quedó reducida a una línea por cada estado booleano, reutilizada en `App` y en `ListPanel`.
+
+---
 
 ```text
 src/
@@ -39,7 +55,8 @@ src/
 │   ├── ItemList.jsx        # Grilla de destinos y mensaje de “Sin resultados”
 │   ├── ListPanel.jsx       # Panel/modal lateral con la lista guardada y botón vaciar
 │   ├── Navbar.jsx          # Cabecera con marca y contador derivado
-│   └── SearchBar.jsx       # Input controlado de búsqueda
+│   ├── SearchBar.jsx       # Input controlado de búsqueda
+│   └── ConfirmationModal.jsx # Modal de confirmación para vaciar la lista
 ├── data/
 │   └── destinations.js     # Base de datos local (20 destinos turísticos)
 ├── hooks/
@@ -78,6 +95,4 @@ npm run dev
 ---    
 
 ## 🚀 Deploy online (Netlify)
-* [Mis Destinos ](https://destinosturisticoslist.netlify.app/) 
-
-
+* [Mis Destinos ](https://destinosturisticoslist.netlify.app/)
