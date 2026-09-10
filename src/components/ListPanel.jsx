@@ -104,7 +104,7 @@ export function ListPanel({
                 <span className="material-symbols-outlined text-4xl mb-2 text-on-surface-variant/50">
                   playlist_remove
                 </span>
-                <p className="text-sm max-w-[200px]">
+                <p className="text-sm max-w-50">
                   Tu lista está vacía. Busca un destino arriba y agrégalo.
                 </p>
               </div>

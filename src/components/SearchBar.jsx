@@ -55,8 +55,11 @@ export function SearchBar({
       </div>
 
       {/* Chips de Categorías */}
+      {/* 🔀 Botones de Filtro por Categoría (Derivadas dinámicamente) */}
       {/* Agregamos clases utilitarias para esconder la barra de scroll de forma nativa en navegadores modernos */}
-      <div className="w-full flex gap-2 overflow-x-auto py-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+      <div className="w-full flex gap-2 overflow-x-auto py-1 scrollbar-none">
+
+         {/* Mapeo de categorías para renderizar chips de selección */}
         {categories.map((cat) => {
           const isActive = category === cat;
           return (
@@ -64,7 +67,7 @@ export function SearchBar({
               key={cat}
               type="button"
               onClick={() => onCategoryChange(cat)}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-150 cursor-pointer whitespace-nowrap ${
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-150 cursor-pointer ${
                 isActive
                   ? 'bg-primary/10 border border-primary text-primary'
                   : 'bg-surface-container border border-outline-variant/40 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high'
