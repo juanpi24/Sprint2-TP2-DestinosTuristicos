@@ -26,6 +26,7 @@ Proyecto desarrollado para el **Trabajo Práctico del Sprint 2**.
 5. **Persistencia en LocalStorage:** lectura inicial lazy para evitar borrado accidental y manejo de errores con `try/catch` ante datos corruptos.
 6. **Panel lateral accesible (modal):** despliega la lista guardada con opción de quitar ítems o vaciarla por completo.
 7. **Bonus — cierre con tecla Escape:** el panel escucha el evento `keydown` global y se cierra al presionar `Escape`, con limpieza en `useEffect`.
+8. **Bonus — modo oscuro/claro:** botón en el navbar que alterna tema. Detecta la preferencia del sistema operativo (`prefers-color-scheme`) la primera vez, y a partir de ahí persiste la elección del usuario en `localStorage` a través de `useDarkMode`, que reutiliza `useLocalStorage`.
 
 ---
 
@@ -36,6 +37,7 @@ Proyecto desarrollado para el **Trabajo Práctico del Sprint 2**.
 - **`count` e `isInList` son estado derivado, no estado propio.** `count` es `list.length` y `isInList` es `watchlist.includes(item.id)`, calculados en cada render. Guardarlos en un `useState` aparte los desincronizaría de la lista real tarde o temprano.
 - **`searchQuery` y `selectedCategory` viven en `App.jsx`** como estados independientes, y `filteredDestinations` se deriva de ambos con `useMemo` (se recalcula solo cuando cambia alguno de los dos, no en cada render).
 - **`isConfirmOpen` vive local en `ListPanel.jsx`** (con su propio `useToggle`), no en `App`, porque solo ese panel necesita saber si el modal de confirmación está abierto. Cada instancia de `useToggle` es independiente entre sí.
+- **`isDark` vive en `App.jsx`** a través de `useDarkMode()`, que por dentro reutiliza `useLocalStorage` (no reinventa la persistencia). Se eligió `App` como dueño porque, aunque hoy solo lo consume `Navbar`, es un estado de tema que en el futuro podría afectar a cualquier componente — mejor tenerlo arriba desde el principio que tener que subirlo después.
 
 ## 🔁 Qué se simplificó con el refactor del Bloque D
 
@@ -60,6 +62,7 @@ src/
 ├── data/
 │   └── destinations.js     # Base de datos local (20 destinos turísticos)
 ├── hooks/
+│   ├── useDarkMode.js      # Hook de dominio para el tema claro/oscuro (persistido)
 │   ├── useLocalStorage.js  # Hook genérico para sincronizar estado con LocalStorage
 │   ├── useToggle.js        # Hook auxiliar para abrir/cerrar estados booleanos
 │   └── useWatchlist.js     # Hook de dominio para la lista de lugares
