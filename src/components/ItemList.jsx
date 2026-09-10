@@ -1,4 +1,5 @@
 import { ItemCard } from './ItemCard';
+
 /**
  * Este componente representa una lista de elementos (destinos) que se muestran en la interfaz.
  * Props:
@@ -29,7 +30,7 @@ export function ItemList({ items, watchlist, onToggle, search, onResetSearch }) 
         <button
           type="button"
           onClick={onResetSearch}
-          className="mt-4 px-4 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/40 text-primary text-xs font-semibold hover:bg-surface-bright transition-colors cursor-pointer"
+          className="mt-4 px-4 py-1.5 rounded-full bg-surface-container-high border border-outline-variant/40 text-primary text-xs font-semibold hover:bg-surface-container-highest transition-colors duration-150 cursor-pointer"
         >
           Ver todos los destinos
         </button>

@@ -1,9 +1,9 @@
 /**
  * Componente que representa una tarjeta de elemento (destino) en la interfaz.
-  * Props:
-  *   - item: Objeto que representa el elemento a mostrar.
-  *   - isInList: Booleano que indica si el elemento está en la lista de seguimiento.
-  *   - onToggle: Función para alternar la inclusión del elemento en la lista.
+ * Props:
+ *   - item: Objeto que representa el elemento a mostrar.
+ *   - isInList: Booleano que indica si el elemento está en la lista de seguimiento.
+ *   - onToggle: Función para alternar la inclusión del elemento en la lista.
  */
 export function ItemCard({ item, isInList, onToggle }) {
   return (
@@ -15,6 +15,7 @@ export function ItemCard({ item, isInList, onToggle }) {
           className="w-full h-full object-cover"
           loading="lazy"
         />
+        {/* Capa de degradado integrada con las variables de superficie */}
         <div className="absolute inset-0 bg-linear-to-t from-surface-container via-surface-container/20 to-transparent" />
         
         {/* Badge condicional leyendo la propiedad booleana "destacado" */}
@@ -28,23 +29,21 @@ export function ItemCard({ item, isInList, onToggle }) {
       <div className="p-4 flex flex-col gap-2 flex-1 justify-between">
         <div>
           <div className="flex items-center justify-between">
-          {/* Información del elemento: categoría, ubicación y calificación */}
-            <span className="text-xs text-primary font-semibold tracking-wider uppercase">
+            {/* Información del elemento: categoría, ubicación y calificación */}
+            <span className="text-xs text-primary font-semibold tracking-wider uppercase truncate max-w-[70%]">
               {item.category} • {item.location}
             </span>
             
             {/* Badge de calificación con estrella y valor numérico */}
-            <span className="text-xs text-tertiary font-bold flex items-center gap-1">
+            <span className="text-xs text-tertiary font-bold flex items-center gap-1 shrink-0">
               ⭐ {item.rating.toFixed(1)} / 5.0
             </span>
           </div>
-         {/* Título del elemento */}
-          <h3 className="text-lg font-bold text-on-surface mt-1">{item.title}</h3>
+          {/* Título del elemento */}
+          <h3 className="text-lg font-bold text-on-surface mt-1 line-clamp-1">{item.title}</h3>
         </div>
 
-        {/* Botón dinámico con operador ternario basado en estado derivado */
-        /* El botón cambia su apariencia y texto según si el elemento está en la lista de seguimiento (isInList).
-           Se utiliza un operador ternario para determinar las clases de estilo y el contenido del botón. */  }  
+        {/* Botón dinámico con operador ternario basado en estado derivado */}
         <button
           type="button"
           onClick={() => onToggle(item.id)}
