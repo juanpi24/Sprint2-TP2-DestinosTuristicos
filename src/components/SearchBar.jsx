@@ -50,6 +50,7 @@ export function SearchBar({
         {/* Input de búsqueda controlado con placeholder y estilos */}
         <input
           type="text"
+          id="search" 
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Buscar por nombre de lugar o provincia..."
